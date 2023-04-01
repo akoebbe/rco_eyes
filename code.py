@@ -43,8 +43,26 @@ right_eyelid = Eyelid(
     Config.eye_theme.eyelid_wide_offset
 )
 
-left_eye = Eye(i2c, 0x30, led_width, led_height, Config.eye_theme.whites_color, left_pupil, left_eyelid)
-right_eye = Eye(i2c, 0x31, led_width, led_height, Config.eye_theme.whites_color, right_pupil, right_eyelid)
+left_eye = Eye(
+    i2c, 
+    Config.left_display_address,
+    led_width, 
+    led_height, 
+    Config.led_brightness,
+    Config.eye_theme.whites_color, 
+    left_pupil, 
+    left_eyelid
+)
+right_eye = Eye(
+    i2c, 
+    Config.right_display_address,
+    led_width, 
+    led_height, 
+    Config.led_brightness,
+    Config.eye_theme.whites_color, 
+    right_pupil, 
+    right_eyelid
+)
 
 animator = Animator(left_eye, right_eye)
 
@@ -74,8 +92,9 @@ async def nunchuck_joystick_monitor():
     while True:
         current_joy = nc.joystick
         if not last_joy_position == current_joy:
-            x = (current_joy.x/255)
-            y = ((255-current_joy.y)/255)
+            
+            x = (current_joy.x/255) if not Config.joystick_invert_x else ((255-current_joy.x)/255)
+            y = ((255-current_joy.y)/255) if not Config.joystick_invert_y else (current_joy.y/255)
 
             left_eye.pupil_position(x, y)
             right_eye.pupil_position(x, y)

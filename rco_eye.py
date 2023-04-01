@@ -67,9 +67,9 @@ class Eyelid:
 
 
 class Eye:
-    def __init__(self, i2c, address, led_width, led_height, outer_color, pupil: Pupil, eyelid: Eyelid):
+    def __init__(self, i2c, address, led_width, led_height, led_brightness, outer_color, pupil: Pupil, eyelid: Eyelid):
         matrix = Adafruit_RGBMatrixQT(i2c=i2c, address=address, allocate=adafruit_is31fl3741.PREFER_BUFFER)
-        matrix.set_led_scaling(0x01)
+        matrix.set_led_scaling(led_brightness)
         matrix.global_current = 0xff
         matrix.enable = True
 

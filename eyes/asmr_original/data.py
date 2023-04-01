@@ -13,7 +13,7 @@ class EyeTheme:
     left_top_eyelid = EYE_PATH + 'eyelid-top-left.bmp' # 13px wide
     left_bottom_eyelid = EYE_PATH + 'eyelid-bottom.bmp' # 13px wide
     
-    eyelid_open_offset = 3 #    
+    eyelid_open_offset = 3 # pixel rows visible
     eyelid_squint_offset = 5
     eyelid_closed_offset = 7
     eyelid_wide_offset = 2
